@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="ultrasound_gazebo" params="link topic update_rate 
+                                                  range_min range_max
+                                                  horizental_min_angle horizental_max_angle
+                                                  vertical_min_angle vertical_max_angle">
+      <gazebo reference="${link}">
+
+        <sensor type="ray" name="sonar">
+          <pose>0.25 0 0 0 0 0</pose>
+          <update_rate>${update_rate}</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>${horizental_min_angle}</min_angle>
+                <max_angle>${horizental_max_angle}</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>${vertical_min_angle}</min_angle>
+                <max_angle>${vertical_max_angle}</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>${range_min}</min>
+              <max>${range_max}</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+
+          <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>5</updateRate>
+            <topicName>${topic}</topicName>
+            <frameName>${link}</frameName>
+            <fov>0.5</fov>
+            <radiation>ultrasound</radiation>
+          </plugin>
+
+        </sensor>
+
+      </gazebo>
+
+
+    </xacro:macro>
+
+</robot>

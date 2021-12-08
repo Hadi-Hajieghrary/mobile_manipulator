@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+<!-- #################### MiR #################### -->  
+<!-- ############################################# -->
+
+    <xacro:macro name="MiR_wheel_transmission" 
+                    params="locationprefix 
+                            hw_interface:=hardware_interface/VelocityJointInterface 
+                            tm_type:=transmission_interface/SimpleTransmission">
+        <transmission name="MiR_${locationprefix}_wheel_trans">
+            <type>${tm_type}</type>
+            <joint name="MiR__base_${locationprefix}_wheel_joint">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+            </joint>
+            <actuator name="MiR__base_${locationprefix}_wheel_motor">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        
+    </xacro:macro>
+
+    <xacro:macro name="MiR_wheel_transmissions">
+        <xacro:MiR_wheel_transmission locationprefix="left"/>
+        <xacro:MiR_wheel_transmission locationprefix="right"/>
+    </xacro:macro>
+
+<!-- ############################################# -->
+<!-- #################### MiR #################### -->
+
+<!-- #################### UR10 #################### -->
+<!-- ############################################## -->
+
+    <xacro:macro name="UR10_joint_transmission" 
+                    params="joint 
+                            hw_interface:=hardware_interface/PositionJointInterface 
+                            tm_type:=transmission_interface/SimpleTransmission">
+        <transmission name="UR10__${joint}_trans">
+            <type>${tm_type}</type>
+            <joint name="UR10__${joint}_joint">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+            </joint>
+            <actuator name="UR10__${joint}_motor">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <xacro:macro name="UR10_joint_transmissions">
+        <xacro:UR10_joint_transmission joint="base_to_shoulder_pan"/>
+        <xacro:UR10_joint_transmission joint="shoulder_pan_to_upper_arm"/>
+        <xacro:UR10_joint_transmission joint="upper_arm_to_fore_arm"/>
+        <xacro:UR10_joint_transmission joint="fore_arm_to_wrist_1"/>
+        <xacro:UR10_joint_transmission joint="wrist_1_to_wrist_2"/>
+        <xacro:UR10_joint_transmission joint="wrist_2_to_wrist_3"/>
+    </xacro:macro>
+
+<!-- ############################################## -->
+<!-- #################### UR10 #################### -->
+
+
+<!-- ############## Barrett Hand ################## -->
+<!-- ############################################## -->
+    <xacro:macro name="BH282_joint_transmission" 
+                    params="joint 
+                            hw_interface:=hardware_interface/PositionJointInterface 
+                            tm_type:=transmission_interface/SimpleTransmission">
+
+        <transmission name="BH282__${joint}_trans">
+            <type>${tm_type}</type>
+            <joint name="BH282__${joint}_joint">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+            </joint>
+            <actuator name="BH282__${joint}_motor">
+                <hardwareInterface>${hw_interface}</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+                <motorTorqueConstant>1</motorTorqueConstant>
+            </actuator>
+        </transmission>
+
+    </xacro:macro>
+<!-- ############################################## -->
+<!-- ############## Barrett Hand ################## -->
+
+</robot>
