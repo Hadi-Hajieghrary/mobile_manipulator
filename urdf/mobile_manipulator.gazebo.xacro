@@ -88,11 +88,24 @@
 
   <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-      <controlPeriod>0.001</controlPeriod>
-      <legacyModeNS>false</legacyModeNS>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <robotNamespace>/</robotNamespace>
+        <controlPeriod>0.001</controlPeriod>
+        <legacyModeNS>false</legacyModeNS>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName> 
+                  MiR__base_fl_caster_rotation_joint, MiR__base_fl_caster_wheel_joint,
+                  MiR__base_bl_caster_rotation_joint, MiR__base_bl_caster_wheel_joint,
+                  MiR__base_fr_caster_rotation_joint, MiR__base_fr_caster_wheel_joint,
+                  MiR__base_br_caster_rotation_joint, MiR__base_br_caster_wheel_joint
+      </jointName>
+      <updateRate>100.0</updateRate>
+      <alwaysOn>true</alwaysOn>
+    </plugin>
   </gazebo>
 
 </robot>

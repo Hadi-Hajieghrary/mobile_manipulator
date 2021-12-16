@@ -63,6 +63,7 @@
 
 <!-- ############## Barrett Hand ################## -->
 <!-- ############################################## -->
+
     <xacro:macro name="BH282_joint_transmission" 
                     params="joint 
                             hw_interface:=hardware_interface/PositionJointInterface 
@@ -81,6 +82,7 @@
         </transmission>
 
     </xacro:macro>
+
 <!-- ############################################## -->
 <!-- ############## Barrett Hand ################## -->
 
