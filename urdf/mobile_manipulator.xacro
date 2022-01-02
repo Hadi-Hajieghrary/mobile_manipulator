@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="attached_bh282_on_ur10">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="mobile_manipulator">
 
     <xacro:include filename="$(find mobile_manipulator)/urdf/common.urdf.xacro" />
 
@@ -14,14 +14,62 @@
     <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.gazebo.xacro" />
 
 
-    <link name="world"/>
+    <xacro:include filename="$(find mobile_manipulator)/urdf/common.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/mir100/mir100.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/mir100/mir100.transmission.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/mir100/mir100.gazebo.xacro" />
+
+
+    <link name="MiR_footprint"/>
+
+    <!-- #################### MiR100 ##################### -->
+    <!-- ################################################# -->
+
+        <!-- #################### URDF ################### -->
+            
+            <xacro:MiR100_mobile_robot parent="MiR_footprint"/>
+
+        <!-- #################### URDF ################### -->
+
+
+        <!-- ############## Transmissions ################ -->
+
+            <xacro:MiR_wheel_transmission locationprefix="left"/>
+            <xacro:MiR_wheel_transmission locationprefix="right"/>
+
+        <!-- ############## Transmissions ################ -->
+
+
+        <!-- ############## Gazebo ####################### -->
+
+            <xacro:set_wheel_friction link="MiR_left_wheel_link" friction="200"/>
+            <xacro:set_wheel_friction link="MiR_right_wheel_link" friction="200"/>
+            <xacro:set_wheel_friction link="MiR_fl_caster_wheel_link" friction="1"/>
+            <xacro:set_wheel_friction link="MiR_fr_caster_wheel_link" friction="1"/>
+            <xacro:set_wheel_friction link="MiR_bl_caster_wheel_link" friction="1"/>
+            <xacro:set_wheel_friction link="MiR_br_caster_wheel_link" friction="1"/>
+
+            <xacro:p3d_base_controller/>
+
+            <!-- <xacro:UR10_controller/> is already Included. BH282_controller is duplication of UR10_controller -->
+            <!-- <xacro:MiR100_controller/> -->
+
+            <xacro:MiR100_gazebo/>
+
+            
+            
+        <!-- ############## Gazebo ####################### -->
+
+    <!-- ################################################# -->
+    <!-- #################### MiR100 ##################### -->
+
 
     <!-- #################### UR10 Arm ################### -->
     <!-- ################################################# -->
 
         <!-- #################### URDF ################### -->
             
-            <xacro:UR10_arm parent="world">
+            <xacro:UR10_arm parent="MiR_base_link">
 	        </xacro:UR10_arm>
 
         <!-- #################### URDF ################### -->

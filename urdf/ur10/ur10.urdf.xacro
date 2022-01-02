@@ -63,7 +63,7 @@
         <xacro:macro name="UR10_arm" params="parent">
             
             <joint name="UR10_base_joint" type="fixed">
-                <origin xyz="1 1 0" rpy="0 0 ${pi}" />
+                <origin xyz="0.15 0.0 0.352" rpy="0.0 0.0 0.0" />
                 <parent link="${parent}"/>
                 <child link="UR10_base_link"/>
             </joint>  

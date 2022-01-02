@@ -10,10 +10,10 @@
         </include>
 
     <!-- send robot urdf to param server -->
-        <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator)/urdf/attached_bh282_on_ur10.xacro'" />
+        <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator)/urdf/mobile_manipulator.xacro'" />
     
     <!-- push robot_description to factory and spawn robot in gazebo -->
-        <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model attached_bh282_on_ur10" respawn="false" output="screen" />
+        <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model mobile_manipulator" respawn="false" output="screen" />
 
     <!-- To Control the Hand of the Robot With rqt joint trajectory controller comment this part out-->
     <!-- Robot state publisher -->
@@ -31,10 +31,12 @@
     <!-- Load the controllers -->
         <rosparam file="$(find mobile_manipulator)/config/controller/ur10_controller.yaml" command="load"/>
         <rosparam file="$(find mobile_manipulator)/config/controller/bh282_controller.yaml" command="load"/>
+        <rosparam file="$(find mobile_manipulator)/config/controller/mir100_controller.yaml" command="load"/>
+
         
     <!-- Start the controllers -->
         <node name="ur10_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
-                    output="screen" ns="/" args="spawn ur10_controller bh282_controller"
+                    output="screen" ns="/" args="spawn ur10_controller bh282_controller mir100_controller"
         /> 
 
     <!-- Start joint_state_publisher is when we do not have a simulation or real robot. This is to generate fake
@@ -42,10 +44,18 @@
       <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
     -->
 
+    <!-- Move Arm and Hand -->
+
         <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" respawn="false" output="screen"/>
 
-
-    <!-- <node name="bh_rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find mobile_manipulator)/config/rviz/bh282_hand.rviz" output="screen"/> -->
+    <!-- Steer MiR -->
+        <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+            <param name="default_topic" value="/mir100_controller/cmd_vel"/>
+            <param name="default_vx_max" value="1.0" />
+            <param name="default_vx_min" value="-1.0" />
+            <param name="default_vw_max" value="1.5" />
+            <param name="default_vw_min" value="-1.5" />
+        </node>
 
 
 </launch>
