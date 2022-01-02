@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur10_arm">
+
+    <xacro:include filename="$(find mobile_manipulator)/urdf/common.urdf.xacro" />
+
+
+    <xacro:include filename="$(find mobile_manipulator)/urdf/ur10/ur10.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/ur10/ur10.transmission.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/ur10/ur10.gazebo.xacro" />
+
+
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.transmission.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.gazebo.xacro" />
+
+
+    <link name="world"/>
+
+    <!-- #################### UR10 Arm ################### -->
+    <!-- ################################################# -->
+
+        <!-- #################### URDF ################### -->
+            
+            <xacro:UR10_arm parent="world">
+	        </xacro:UR10_arm>
+
+        <!-- #################### URDF ################### -->
+
+        <!-- ############## Transmissions ################ -->
+
+            <xacro:UR10_joint_transmission joint="base_to_shoulder_pan"/>
+            <xacro:UR10_joint_transmission joint="shoulder_pan_to_upper_arm"/>
+            <xacro:UR10_joint_transmission joint="upper_arm_to_fore_arm"/>
+            <xacro:UR10_joint_transmission joint="fore_arm_to_wrist_1"/>
+            <xacro:UR10_joint_transmission joint="wrist_1_to_wrist_2"/>
+            <xacro:UR10_joint_transmission joint="wrist_2_to_wrist_3"/>
+
+        <!-- ############## Transmissions ################ -->
+
+
+        <!-- ############## Gazebo ####################### -->
+
+            <xacro:UR10_gazebo/>
+
+            <xacro:UR10_controller/>
+         
+        <!-- ############## Gazebo ####################### -->
+
+
+    <!-- ################################################# -->
+    <!-- #################### UR10 Arm ################### -->
+
+
+    <!-- #################### Barret Hand ################### -->
+    <!-- #################################################### -->
+
+        <!-- #################### URDF ################### -->
+            
+            <xacro:BH282_hand parent="UR10_end_effector_link">
+	        </xacro:BH282_hand>
+
+        <!-- #################### URDF ################### -->
+
+        <!-- ############## Transmissions ################ -->
+
+            <!-- Finger 1-->
+
+                <xacro:BH282_joint_transmission joint="base_to_finger_11"/>
+                <xacro:BH282_joint_transmission joint="finger_11_to_finger_12"/>
+                <xacro:BH282_joint_transmission joint="finger_12_to_finger_13"/>
+
+            <!-- Finger 2-->
+
+                <xacro:BH282_joint_transmission joint="base_to_finger_21"/>
+                <xacro:BH282_joint_transmission joint="finger_21_to_finger_22"/>
+                <xacro:BH282_joint_transmission joint="finger_22_to_finger_23"/>
+
+            <!-- Finger 2-->
+
+                <xacro:BH282_joint_transmission joint="finger_31_to_finger_32"/>
+                <xacro:BH282_joint_transmission joint="finger_32_to_finger_33"/>
+
+        <!-- ############## Transmissions ################ -->
+
+
+        <!-- ############## Gazebo ####################### -->
+
+            <xacro:BH282_gazebo/>
+
+            <!-- <xacro:UR10_controller/> is already Included. BH282_controller is duplication of UR10_controller -->
+                <!--xacro:BH282_controller/-->
+            
+        <!-- ############## Gazebo ####################### -->
+
+
+    <!-- #################################################### -->
+    <!-- #################### Barret Hand ################### -->
+
+
+
+
+
+
+</robot>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="bh282_hand">
+
+    <xacro:include filename="$(find mobile_manipulator)/urdf/common.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.urdf.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.transmission.xacro" />
+    <xacro:include filename="$(find mobile_manipulator)/urdf/bh282/bh282.gazebo.xacro" />
+
+
+    <link name="world"/>
+
+    <!-- #################### Barret Hand ################### -->
+    <!-- #################################################### -->
+
+        <!-- #################### URDF ################### -->
+            
+            <xacro:BH282_hand parent="world">
+	        </xacro:BH282_hand>
+
+        <!-- #################### URDF ################### -->
+
+        <!-- ############## Transmissions ################ -->
+
+            <!-- Finger 1-->
+
+                <xacro:BH282_joint_transmission joint="base_to_finger_11"/>
+                <xacro:BH282_joint_transmission joint="finger_11_to_finger_12"/>
+                <xacro:BH282_joint_transmission joint="finger_12_to_finger_13"/>
+
+            <!-- Finger 2-->
+
+                <xacro:BH282_joint_transmission joint="base_to_finger_21"/>
+                <xacro:BH282_joint_transmission joint="finger_21_to_finger_22"/>
+                <xacro:BH282_joint_transmission joint="finger_22_to_finger_23"/>
+
+            <!-- Finger 2-->
+
+                <xacro:BH282_joint_transmission joint="finger_31_to_finger_32"/>
+                <xacro:BH282_joint_transmission joint="finger_32_to_finger_33"/>
+
+        <!-- ############## Transmissions ################ -->
+
+
+        <!-- ############## Gazebo ####################### -->
+
+            <xacro:BH282_gazebo/>
+
+            <xacro:BH282_controller/>
+            
+        <!-- ############## Gazebo ####################### -->
+
+
+    <!-- #################################################### -->
+    <!-- #################### Barret Hand ################### -->
+
+</robot>

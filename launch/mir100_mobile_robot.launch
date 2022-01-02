@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+    
+    <param name="/use_sim_time" value="true" />
+    
+    <!-- startup simulated world -->
+        <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="world_name" default="worlds/empty.world"/>
+            <arg name="paused" value="false"/>
+        </include>
+
+    <!-- send robot urdf to param server -->
+        <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator)/urdf/mir100/mir100_mobile_robot.xacro'" />
+    
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+        <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model MiR100_Mobile_Robot" respawn="false" output="screen" />
+    
+    <!-- To Control the Hand of the Robot With rqt joint trajectory controller comment this part out-->
+    <!-- Robot state publisher -->
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+            <param name="publish_frequency" type="double" value="50.0" />
+        </node>
+    
+
+    <!-- Load joint_state_controller -->
+        <rosparam file="$(find mobile_manipulator)/config/controller/joint_state_controller.yaml" command="load"/>
+    
+    <!-- Start joint_state_controller -->
+        <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+    
+
+    <!-- Load the controllers -->
+        <rosparam file="$(find mobile_manipulator)/config/controller/mir100_controller.yaml" command="load"/>
+
+    <!-- Start the controllers -->
+        <node name="mir100_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+                    output="screen" ns="/" args="spawn mir100_controller"
+        /> 
+
+    <!-- Start joint_state_publisher is when we do not have a simulation or real robot. This is to generate fake
+        value of the joint for Rviz to Visualize 
+      <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    -->
+
+    <node name="mir_rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find mobile_manipulator)/config/rviz/mir100_mobile_robot.rviz" output="screen"/>
+
+    <!-- Steer MiR -->
+        <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+            <param name="default_topic" value="/mir100_controller/cmd_vel"/>
+            <param name="default_vx_max" value="1.0" />
+            <param name="default_vx_min" value="-1.0" />
+            <param name="default_vw_max" value="1.5" />
+            <param name="default_vw_min" value="-1.5" />
+        </node>
+
+
+</launch>
