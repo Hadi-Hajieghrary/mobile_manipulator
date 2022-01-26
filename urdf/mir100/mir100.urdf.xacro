@@ -29,6 +29,10 @@
         <xacro:property name="imu_stdev" value="0.00017" />
         <xacro:property name="imu_update_rate" value="50" />
 
+        <xacro:property name="wheel_separation" value="0.445208" />
+        <xacro:property name="wheel_radius" value="0.0625" />
+
+
     <!-- ############################################# -->
     <!-- ################# Properties ################ -->
 
@@ -139,7 +143,7 @@
 
         <xacro:macro name="MiR100_mobile_robot" params="parent">
 
-            <joint name="MiR__base_joint" type="fixed">
+            <joint name="MiR__base_joint_fixed" type="fixed">
                 <parent link="${parent}" />
                 <child link="MiR_base_link" />
                 <origin xyz="0 0 0" rpy="0 0 0" />
@@ -181,7 +185,7 @@
             <xacro:caster_wheel locationprefix="br" locationright="1" wheel_base_dx="${mir_100_back_caster_wheel_base_dx}"/>
 
 
-            <joint name="MiR__base_to_surface_joint" type="fixed">
+            <joint name="MiR__base_to_surface_joint_fixed" type="fixed">
                 <origin xyz="${mir_100_act_wheel_dx} 0 0.352" rpy="0 0 0" />
                 <parent link="MiR_base_link" />
                 <child link="MiR_surface" />
@@ -193,7 +197,7 @@
 
             <!-- IMU -->
 
-                <joint name="MiR__base_to_imu_joint" type="fixed">
+                <joint name="MiR__base_to_imu_joint_fixed" type="fixed">
                     <parent link="MiR_base_link" />
                     <child link="MiR_imu_link" />
                     <origin xyz="0.0 0.0 0.25" rpy="0 0 0" />  <!-- same as real MiR -->
@@ -204,7 +208,7 @@
                 <!-- Create an alias for imu_link. This is necessary because the real MiR's
                     TF has imu_link, but the imu_data topic is published in the imu_frame
                     frame. -->
-                    <joint name="MiR__imu_link_to_imu_frame_joint" type="fixed">
+                    <joint name="MiR__imu_link_to_imu_frame_joint_fixed" type="fixed">
                         <parent link="MiR_imu_link" />
                         <child link="MiR_imu_frame" />
                         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -233,7 +237,7 @@
                     </xacro:box_inertial>
                 </link>
 
-                <joint name="MiR__base_to_front_laser_joint" type="fixed">
+                <joint name="MiR__base_to_front_laser_joint_fixed" type="fixed">
                     <parent link="MiR_base_link" />
                     <child link="MiR_front_laser_link" />
                     <origin xyz="0.4288 0.2358 0.1914" rpy="0.0 0.0 ${0.25 * pi}" />  <!-- from visually matching up the meshes of the MiR and the laser scanner -->
@@ -258,7 +262,7 @@
                     </xacro:box_inertial>
                 </link>
 
-                <joint name="Mir__base_to_back_laser_joint" type="fixed">
+                <joint name="Mir__base_to_back_laser_joint_fixed" type="fixed">
                     <parent link="MiR_base_link" />
                     <child link="MiR_back_laser_link" />
                     <origin xyz="-0.3548 -0.2352 0.1914" rpy="0.0 0.0 ${-0.75 * pi}" />  <!-- from visually matching up the meshes of the MiR and the laser scanner -->
@@ -268,7 +272,7 @@
 
                 <link name="MiR_right_us_frame" />
 
-                <joint name="MiR__base_to_right_us_joint" type="fixed">  
+                <joint name="MiR__base_to_right_us_joint_fixed" type="fixed">  
                     <parent link="MiR_base_link" />
                     <child link="MiR_right_us_frame" />
                     <origin xyz="0.45 -0.12 0.16 " rpy="0 0 0" />  <!-- from visually matching to the mesh of the MiR -->
@@ -276,7 +280,7 @@
 
                 <link name="MiR_left_us_frame" />
 
-                <joint name="MiR__base_to_left_us_joint" type="fixed">   
+                <joint name="MiR__base_to_left_us_joint_fixed" type="fixed">   
                     <parent link="MiR_base_link" />
                     <child link="MiR_left_us_frame" />
                     <origin xyz="0.45 0.12 0.16 " rpy="0 0 0" />  <!-- from visually matching to the mesh of the MiR -->

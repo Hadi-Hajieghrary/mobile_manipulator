@@ -28,4 +28,55 @@ bh282_controller:
   state_publish_rate:  25
   # Frequency (in Hz) monitors the frequency of the action target state. This is an advanced parameter that does not need to be changed.
   action_monitor_rate: 10
-
+# bh282_controller:
+#   type: effort_controllers/JointTrajectoryController
+#   joints:
+#     - BH282__base_to_finger_11_joint
+#     - BH282__finger_11_to_finger_12_joint
+#     - BH282__finger_12_to_finger_13_joint
+#     - BH282__base_to_finger_21_joint
+#     - BH282__finger_21_to_finger_22_joint
+#     - BH282__finger_22_to_finger_23_joint
+#     - BH282__finger_31_to_finger_32_joint
+#     - BH282__finger_32_to_finger_33_joint
+#   gains:
+#     BH282__base_to_finger_11_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_11_to_finger_12_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_12_to_finger_13_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__base_to_finger_21_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_21_to_finger_22_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_22_to_finger_23_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_31_to_finger_32_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     BH282__finger_32_to_finger_33_joint:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1

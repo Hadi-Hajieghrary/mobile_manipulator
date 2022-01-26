@@ -19,10 +19,11 @@
 
         <xacro:macro name="BH282_hand" params="parent">
             
-            <joint name="BH282_base_joint" type="fixed">
+            <joint name="BH282_base_joint_fixed" type="fixed">
                 <!-- To Attach the Gripper to the Arm -->
-                <origin xyz="0 0 0" rpy="0 ${0.5 * pi} 0" />
-                <!-- <origin xyz="0 0 0" rpy="0 0 0" /> -->
+                <!-- Change This if you would like to run the gripper stand-alone -->
+                <!-- <origin xyz="0 0 0" rpy="0 ${0.5 * pi} 0" /> -->
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <parent link="${parent}"/>
                 <child link="BH282_base_link"/>
             </joint>  
@@ -255,7 +256,7 @@
                     </collision>
                 </link>
 
-                <joint name="BH282__base_to_finger_31_joint" type="fixed">
+                <joint name="BH282__base_to_finger_31_joint_fixed" type="fixed">
                     <parent link="BH282_base_link"/>
                     <child link="BH282_finger_31_link"/>
                     <origin xyz="0 0 0.0252" rpy="0 0 ${-0.5 * pi}"/>

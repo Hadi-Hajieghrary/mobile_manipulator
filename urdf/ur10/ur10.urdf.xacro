@@ -62,7 +62,7 @@
 
         <xacro:macro name="UR10_arm" params="parent">
             
-            <joint name="UR10_base_joint" type="fixed">
+            <joint name="UR10_base_joint_fixed" type="fixed">
                 <origin xyz="0.15 0.0 0.352" rpy="0.0 0.0 0.0" />
                 <parent link="${parent}"/>
                 <child link="UR10_base_link"/>
@@ -274,7 +274,7 @@
                 </xacro:cylinder_inertial>
             </link>
 
-            <joint name="UR10__wrist_3_to_end_effector_fixed_joint" type="fixed">
+            <joint name="UR10__wrist_3_to_end_effector_joint_fixed" type="fixed">
                 <parent link="UR10_wrist_3_link" />
                 <child link = "UR10_end_effector_link" />
                 <origin xyz="0.0 ${ur10_wrist_3_length} 0.0" rpy="0.0 0.0 ${pi/2.0}" />

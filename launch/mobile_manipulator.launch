@@ -35,7 +35,7 @@
 
         
     <!-- Start the controllers -->
-        <node name="ur10_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+        <node name="mobile_manipulator_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
                     output="screen" ns="/" args="spawn ur10_controller bh282_controller mir100_controller"
         /> 
 

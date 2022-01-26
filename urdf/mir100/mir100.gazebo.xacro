@@ -74,7 +74,7 @@
                     <wheelSeparation>${wheel_separation}</wheelSeparation>
                     <wheelDiameter>${2*wheel_radius}</wheelDiameter>
                     <wheelTorque>10</wheelTorque>
-                    <publishTf>1</publishTf>
+                    <publishTf>false</publishTf>
                     <odometryFrame>map</odometryFrame>
                     <commandTopic>MiR/controller/cmd_vel</commandTopic>
                     <odometryTopic>MiR/controller/odom</odometryTopic>

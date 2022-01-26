@@ -41,7 +41,7 @@
       <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
     -->
 
-    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" respawn="false" output="screen"/>
+    <!-- <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" respawn="false" output="screen"/> -->
 
     <!-- <node name="bh_rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find mobile_manipulator)/config/rviz/bh282_hand.rviz" output="screen"/> -->
 

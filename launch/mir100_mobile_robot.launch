@@ -32,11 +32,12 @@
     <!-- Load the controllers -->
         <rosparam file="$(find mobile_manipulator)/config/controller/mir100_controller.yaml" command="load"/>
 
-    <!-- Start the controllers -->
+    <!-- Start the controllers 
         <node name="mir100_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
                     output="screen" ns="/" args="spawn mir100_controller"
         /> 
-
+    -->
+    
     <!-- Start joint_state_publisher is when we do not have a simulation or real robot. This is to generate fake
         value of the joint for Rviz to Visualize 
       <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />

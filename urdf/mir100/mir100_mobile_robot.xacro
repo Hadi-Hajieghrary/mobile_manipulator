@@ -38,8 +38,10 @@
 
             <xacro:p3d_base_controller/>
 
-            <xacro:MiR100_controller/>
-
+            <xacro:MiR_controller_plugin_gazebo left_wheel_joint="MiR__base_left_wheel_joint" right_wheel_joint="MiR__base_right_wheel_joint" wheel_separation="${wheel_separation}" wheel_radius="${wheel_radius}"/>
+            
+            <!-- <xacro:MiR100_controller/> -->
+            
             <xacro:MiR100_gazebo/>
 
             

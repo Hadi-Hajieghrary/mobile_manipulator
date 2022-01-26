@@ -9,7 +9,7 @@
             <arg name="paused" value="false"/>
         </include>
 
-    <!-- ATTENTION: To run this fix the Direction of the BH282_base_joint -->
+    <!-- !!!!!ATTENTION: To run this fix the Direction of the BH282_base_joint_fixed!!!!! -->
     
     <!-- send robot urdf to param server -->
         <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator)/urdf/bh282/bh282_hand.xacro'" />
