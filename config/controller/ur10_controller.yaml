@@ -12,7 +12,7 @@ ur10_controller:
     # the trajectory is successful, otherwise it is aborted.
     goal_time: 0.00
     # The speed is considered to be approximately equal to zero.
-    stopped_velocity_tolerance: 0.00
+    stopped_velocity_tolerance: 0.10
     UR10__base_to_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
     UR10__shoulder_pan_to_upper_arm_joint: {trajectory: 0.1, goal: 0.1}
     UR10__upper_arm_to_fore_arm_joint: {trajectory: 0.1, goal: 0.1}

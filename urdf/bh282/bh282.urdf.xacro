@@ -5,11 +5,12 @@
     <!-- ################# Properties ################ -->
     <!-- ############################################# -->
 
-        <xacro:property name="BH282_joint_damping" value="100.0" />
-        <xacro:property name="BH282_joint_friction" value="1.0" />
+        <xacro:property name="BH282_joint_damping" value="0.7" />
+        <xacro:property name="BH282_joint_friction" value="0.0" />
         <xacro:property name="BH282_joint_effort_limit" value="30.0" />
         <xacro:property name="BH282_joint_velocity_limit" value="2.0" />
         <xacro:property name="BH282_mechanical_reduction" value="1.0" />
+        <xacro:property name="BH282_friction_coefficient" value="100.0" />
 
     <!-- ############################################# -->
     <!-- ################# Properties ################ -->
@@ -22,8 +23,8 @@
             <joint name="BH282_base_joint_fixed" type="fixed">
                 <!-- To Attach the Gripper to the Arm -->
                 <!-- Change This if you would like to run the gripper stand-alone -->
-                <!-- <origin xyz="0 0 0" rpy="0 ${0.5 * pi} 0" /> -->
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 ${0.5 * pi} 0" />
+                <!-- <origin xyz="0 0 0" rpy="0 0 0" /> -->
                 <parent link="${parent}"/>
                 <child link="BH282_base_link"/>
             </joint>  
@@ -46,7 +47,7 @@
                     <geometry>
                         <mesh filename="package://mobile_manipulator/mesh/barrett/palm_282.dae"/>
                     </geometry>
-                    <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+                    <contact_coefficients kd="1.0" kp="1000.0" mu="${BH282_friction_coefficient}"/>
                 </collision>     
             </link>
 
@@ -321,6 +322,7 @@
                     <limit effort="${BH282_joint_effort_limit}" lower="0.0" upper="0.84" velocity="${BH282_joint_velocity_limit}"/>
                     <dynamics damping="${BH282_joint_damping}" friction="${BH282_joint_friction}"/>
                 </joint>
+
 
         </xacro:macro>
  

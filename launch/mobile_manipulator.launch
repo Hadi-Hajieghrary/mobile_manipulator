@@ -35,8 +35,14 @@
 
         
     <!-- Start the controllers -->
-        <node name="mobile_manipulator_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
-                    output="screen" ns="/" args="spawn ur10_controller bh282_controller mir100_controller"
+        <node name="mir100_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+                    output="screen" ns="/" args="spawn mir100_controller"
+        /> 
+        <node name="ur10_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+                    output="screen" ns="/" args="spawn ur10_controller"
+        /> 
+        <node name="bh282_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+                    output="screen" ns="/" args="spawn bh282_controller"
         /> 
 
     <!-- Start joint_state_publisher is when we do not have a simulation or real robot. This is to generate fake

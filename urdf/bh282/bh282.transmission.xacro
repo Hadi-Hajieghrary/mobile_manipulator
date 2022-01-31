@@ -7,7 +7,7 @@
 
         <xacro:macro name="BH282_joint_transmission" 
                         params="joint 
-                                hw_interface:=hardware_interface/PositionJointInterface 
+                                hw_interface:=hardware_interface/EffortJointInterface
                                 tm_type:=transmission_interface/SimpleTransmission">
 
             <transmission name="BH282__${joint}_trans">
